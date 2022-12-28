@@ -4,6 +4,7 @@ import {
   ErrorComponent,
   ReadyPage,
   LightTheme,
+  DarkTheme,
   CssBaseline,
   ThemeProvider,
   GlobalStyles,
@@ -12,6 +13,8 @@ import {
 } from "@pankod/refine-mui";
 import routerProvider from "@pankod/refine-react-router-v6";
 import dataProvider from "@pankod/refine-simple-rest";
+
+import { PostList, PostShow, PostEdit } from "./pages";
 
 const App: React.FC = () => {
   return (
@@ -28,7 +31,14 @@ const App: React.FC = () => {
               Layout={Layout}
               ReadyPage={ReadyPage}
               catchAll={<ErrorComponent />}
-              resources={[{ name: "posts" }]}
+              resources={[
+                {
+                  name: "posts",
+                  list: PostList,
+                  edit: PostEdit,
+                  show: PostShow,
+                },
+              ]}
           />
         </RefineSnackbarProvider>
       </ThemeProvider>
