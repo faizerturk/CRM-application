@@ -9,6 +9,7 @@ import {
   DateField,
   List,
   EditButton,
+  DeleteButton,
   Stack
 } from "@pankod/refine-mui";
 
@@ -83,6 +84,10 @@ export const PostList: React.FC = () => {
                 <Stack direction="row" spacing={1}>
                   <EditButton hideText recordItemId={params.row.id} />
                   <ShowButton hideText recordItemId={params.row.id} />
+                  <DeleteButton
+                      hideText
+                      recordItemId={params.row.id}
+                  />
                 </Stack>
             );
           },

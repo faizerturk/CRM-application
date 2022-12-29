@@ -14,11 +14,24 @@ import {
 import routerProvider from "@pankod/refine-react-router-v6";
 import dataProvider from "@pankod/refine-simple-rest";
 
-import { PostList, PostShow, PostEdit } from "./pages";
+import { PostList, PostShow, PostEdit, PostCreate } from "./pages";
+
+const overridedLightTheme = {
+  ...DarkTheme,
+  palette: {
+    ...DarkTheme.palette,
+    primary: {
+      main: "#97DECE",
+    },
+    secondary: {
+      main: "#6668ac",
+    },
+  },
+};
 
 const App: React.FC = () => {
   return (
-      <ThemeProvider theme={LightTheme}>
+      <ThemeProvider theme={overridedLightTheme}>
         <CssBaseline />
         <GlobalStyles styles={{ html: { WebkitFontSmoothing: "auto" } }} />
         <RefineSnackbarProvider>
@@ -37,6 +50,8 @@ const App: React.FC = () => {
                   list: PostList,
                   edit: PostEdit,
                   show: PostShow,
+                  create: PostCreate,
+                  //canDelete: true,
                 },
               ]}
           />
