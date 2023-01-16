@@ -1,49 +1,37 @@
-import { Refine } from "@pankod/refine-core";
+import {Refine} from "@pankod/refine-core";
 import {
-  Layout,
   ErrorComponent,
   ReadyPage,
-  LightTheme,
   DarkTheme,
+  Layout,
   CssBaseline,
-  ThemeProvider,
   GlobalStyles,
   RefineSnackbarProvider,
-  notificationProvider,
+  notificationProvider, AppBar, Stack, Box, IconButton,
 } from "@pankod/refine-mui";
 import routerProvider from "@pankod/refine-react-router-v6";
 import dataProvider from "@pankod/refine-simple-rest";
+import {ColorModeContextProvider, ColorModeContext} from "./contexts"
 
-import { PostList, PostShow, PostEdit, PostCreate } from "./pages";
-
-const overridedLightTheme = {
-  ...DarkTheme,
-  palette: {
-    ...DarkTheme.palette,
-    primary: {
-      main: "#97DECE",
-    },
-    secondary: {
-      main: "#6668ac",
-    },
-  },
-};
+import {PostList, PostShow, PostEdit, PostCreate} from "./pages";
+import {useContext} from "react";
+import {DarkModeOutlined, LightModeOutlined} from "@mui/icons-material";
+import {Header} from "./components"
 
 const App: React.FC = () => {
   return (
-      <ThemeProvider theme={overridedLightTheme}>
-        <CssBaseline />
-        <GlobalStyles styles={{ html: { WebkitFontSmoothing: "auto" } }} />
+      <ColorModeContextProvider>
+        <CssBaseline/>
+        <GlobalStyles styles={{html: {WebkitFontSmoothing: "auto"}}}/>
         <RefineSnackbarProvider>
           <Refine
-              routerProvider={routerProvider}
-              dataProvider={dataProvider(
-                  "https://api.fake-rest.refine.dev",
-              )}
+              dataProvider={dataProvider("https://api.fake-rest.refine.dev",)}
               notificationProvider={notificationProvider}
               Layout={Layout}
               ReadyPage={ReadyPage}
-              catchAll={<ErrorComponent />}
+              catchAll={<ErrorComponent/>}
+              routerProvider={routerProvider}
+              Header={Header}
               resources={[
                 {
                   name: "posts",
@@ -56,7 +44,7 @@ const App: React.FC = () => {
               ]}
           />
         </RefineSnackbarProvider>
-      </ThemeProvider>
+      </ColorModeContextProvider>
   );
 };
 
